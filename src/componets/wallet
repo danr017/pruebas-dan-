@@ -1,0 +1,77 @@
+import React, { useState } from "react";
+import Cotizaciones from "./Cotizaciones";
+import Historial from "./Historial";
+import DepositosRetiros from "./DepositosRetiros";
+import Contacto from "./Contacto";
+
+const SALDO = 42714.2;
+const HISTORIAL = [
+  {
+    date: "2024-08-07",
+    type: "Depósito",
+    amount: 40000,
+    currency: "USDT",
+    status: "Congelado",
+    details: "40,000 USDT depositados y congelados el 7 de agosto de 2024"
+
+  }
+];
+
+export default function Wallet({ user, onLogout }) {
+  const [tab, setTab] = useState("balance");
+
+  return (
+    <div style={{ maxWidth: 420, margin: "40px auto", background: "#fff", padding: 24, borderRadius: 12, boxShadow: "0 2px 12px #0002" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <h2 style={{ margin: 0 }}>Mini Wallet</h2>
+        <button onClick={onLogout} style={{ background: "#eee", border: "none", borderRadius: 4, padding: "4px 10px", cursor: "pointer" }}>
+          Salir
+        </button>
+      </div>
+      <div style={{ margin: "24px 0 12px", padding: 14, background: "#fafaff", borderRadius: 8, border: "1px solid #e3e6eb" }}>
+        <div style={{ fontSize: 18, fontWeight: 600 }}>Balance total</div>
+        <div style={{ fontSize: 32, color: "#2986fa", fontWeight: 700 }}>
+          {SALDO.toLocaleString()} USDT
+        </div>
+        <div style={{ color: "#e67e22", marginTop: 4, fontSize: 14, fontWeight: 500 }}>
+          Tus activos están congelados, solo puedes visualizarlos.
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
+        <button onClick={() => setTab("balance")} style={tab==="balance"?activeBtn:btn}>Balance</button>
+        <button onClick={() => setTab("cotizaciones")} style={tab==="cotizaciones"?activeBtn:btn}>Cotizaciones</button>
+        <button onClick={() => setTab("depositos")} style={tab==="depositos"?activeBtn:btn}>Depósitos/Retiros</button>
+        <button onClick={() => setTab("historial")} style={tab==="historial"?activeBtn:btn}>Historial</button>
+        <button onClick={() => setTab("contacto")} style={tab==="contacto"?activeBtn:btn}>Contacto</button>
+      </div>
+      <div>
+        {tab === "balance" && (
+          <div>
+            <div style={{ fontWeight: 600, fontSize: 15 }}>Activo principal: USDT</div>
+            <div style={{ color: "#888", fontSize: 13 }}>No puedes operar ni retirar. Solo visualización.</div>
+          </div>
+        )}
+        {tab === "cotizaciones" && <Cotizaciones />}
+        {tab === "depositos" && <DepositosRetiros />}
+        {tab === "historial" && <Historial historial={HISTORIAL} />}
+        {tab === "contacto" && <Contacto />}
+      </div>
+    </div>
+  );
+}
+
+const btn = {
+  flex: 1,
+  background: "#f5f6fa",
+  border: "1px solid #e3e6eb",
+  borderRadius: 4,
+  padding: "8px 0",
+  fontWeight: 500,
+  cursor: "pointer"
+};
+const activeBtn = {
+  ...btn,
+  background: "#2986fa",
+  color: "#fff",
+  border: "1px solid #2986fa"
+};
