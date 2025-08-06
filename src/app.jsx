@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Login from "./components/Login";
-import Wallet from "./components/Wallet";
+import Login from "./components/login.jsx";
+import Wallet from "./components/wallet.jsx";
 
 function App() {
   const [user, setUser] = useState(null);

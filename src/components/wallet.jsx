@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Cotizaciones from "./Cotizaciones";
-import Historial from "./Historial";
-import DepositosRetiros from "./DepositosRetiros";
-import Contacto from "./Contacto";
+import Cotizaciones from "./cotizaciones.jsx";
+import Historial from "./historial.jsx";
+import DepositosRetiros from "./depositosretiros.jsx";
+import Contacto from "./contacto.jsx";
 
 const SALDO = 42714.2;
 const HISTORIAL = [
